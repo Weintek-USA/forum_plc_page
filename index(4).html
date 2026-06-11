@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weintek HMI Driver Index — Find your PLC</title>
+<meta name="description" content="Searchable index of EasyBuilder Pro communication drivers and PLC connection guides. Type your PLC model to find the recommended driver and its instruction PDF.">
+<meta property="og:title" content="Weintek HMI Driver Index — Find your PLC">
+<meta property="og:description" content="Type your PLC model to find the recommended EasyBuilder Pro driver and its connection guide PDF. 220 drivers, 45 manufacturers.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230054a6'/%3E%3Ctext x='16' y='23' font-family='Arial,sans-serif' font-size='19' font-weight='bold' fill='white' text-anchor='middle'%3EW%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#0054a6;          /* Weintek corporate blue */
+    --blue-dark:#003e7e;
+    --blue-deep:#0a2a4d;
+    --blue-light:#e8f1fa;
+    --ink:#1c2530;
+    --paper:#f5f7fa;
+    --card:#ffffff;
+    --line:#d7dee6;
+    --tag-bg:#eef3f8;
+    --tag-ink:#3a4a5c;
+    --mono:'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
+    --sans:'Archivo', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5}
+  a{color:var(--blue)}
+  mark{background:#cfe3f7;color:inherit;border-radius:2px;padding:0 1px}
+
+  /* ---------- top contact strip (like weintekusa.com) ---------- */
+  .topstrip{background:#fff;border-bottom:1px solid var(--line)}
+  .topstrip .inner{max-width:1100px;margin:0 auto;padding:7px 20px;display:flex;justify-content:flex-end;gap:22px;font-size:12.5px;color:#5a6878}
+  .topstrip a{color:#5a6878;text-decoration:none}
+  .topstrip a:hover{color:var(--blue)}
+
+  /* ---------- header ---------- */
+  header{background:linear-gradient(135deg,var(--blue-deep) 0%, var(--blue-dark) 55%, var(--blue) 100%);color:#fff}
+  .plate{max-width:1100px;margin:0 auto;padding:30px 20px 24px}
+  .plate-top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#9dbede;margin:0 0 6px}
+  h1{font-size:clamp(24px,4vw,36px);font-weight:750;font-stretch:112%;letter-spacing:-.01em;margin:0;color:#fff}
+  h1 .accent{color:#8fc1ee}
+  .plate-links{font-family:var(--mono);font-size:12px;display:flex;gap:18px;flex-wrap:wrap}
+  .plate-links a{color:#c9ddf0;text-decoration:none;border-bottom:1px solid #3f6c9c;padding-bottom:2px}
+  .plate-links a:hover{color:#fff;border-color:#8fc1ee}
+  .plate p.sub{margin:10px 0 0;max-width:62ch;color:#b9d2e8;font-size:14px}
+
+  /* ---------- search bar (sticky) ---------- */
+  .searchbar{position:sticky;top:0;z-index:30;background:var(--blue);border-bottom:1px solid var(--blue-dark);box-shadow:0 2px 10px rgba(0,40,80,.22)}
+  .searchwrap{max-width:1100px;margin:0 auto;padding:14px 20px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .searchbox{flex:1 1 340px;position:relative}
+  .searchbox input{
+    width:100%;padding:12px 84px 12px 42px;border-radius:6px;border:1px solid var(--blue-dark);
+    background:#fff;color:var(--ink);font-family:var(--mono);font-size:15px;outline:none;
+  }
+  .searchbox input::placeholder{color:#8b99a8}
+  .searchbox input:focus{border-color:#8fc1ee;box-shadow:0 0 0 3px rgba(143,193,238,.4)}
+  .searchbox .lens{position:absolute;left:13px;top:21px;transform:translateY(-50%);color:#8b99a8;pointer-events:none;font-size:15px}
+  .searchbox .kbd{position:absolute;right:46px;top:21px;transform:translateY(-50%);font-family:var(--mono);font-size:11px;color:#8b99a8;border:1px solid var(--line);border-radius:4px;padding:1px 6px}
+  .searchbox .clear{position:absolute;right:8px;top:21px;transform:translateY(-50%);background:none;border:none;color:#8b99a8;font-size:18px;cursor:pointer;padding:4px;display:none;line-height:1}
+  .searchbox .clear:hover{color:var(--ink)}
+
+  /* ---------- autocomplete ---------- */
+  .suggest{
+    position:absolute;left:0;right:0;top:calc(100% + 5px);background:#fff;border:1px solid var(--line);
+    border-radius:6px;box-shadow:0 10px 30px rgba(10,42,77,.18);max-height:330px;overflow-y:auto;display:none;z-index:40;
+  }
+  .suggest.open{display:block}
+  .s-item{display:flex;align-items:center;gap:10px;padding:9px 13px;cursor:pointer;border-bottom:1px solid #eef2f6}
+  .s-item:last-child{border-bottom:none}
+  .s-item:hover,.s-item.active{background:var(--blue-light)}
+  .s-item .s-text{font-family:var(--mono);font-size:13.5px;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .s-item .s-text b{color:var(--blue);font-weight:600}
+  .s-item .s-kind{margin-left:auto;flex:none;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:#9bb1c7;border-radius:3px;padding:2px 6px}
+  .s-item .s-kind.model{background:var(--blue)}
+  .s-item .s-kind.driver{background:#3a78b5}
+  .s-item .s-kind.vendor{background:#6b85a0}
+
+  .conn-filters{display:flex;gap:6px;flex-wrap:wrap}
+  .chip{font-family:var(--mono);font-size:12px;padding:7px 12px;border-radius:99px;border:1px solid #3f6c9c;background:transparent;color:#d4e4f3;cursor:pointer}
+  .chip:hover{border-color:#8fc1ee}
+  .chip[aria-pressed="true"]{background:#fff;border-color:#fff;color:var(--blue);font-weight:600}
+  .count{font-family:var(--mono);font-size:12px;color:#b9d2e8;margin-left:auto;white-space:nowrap}
+
+  /* ---------- vendor index ---------- */
+  .vendorbar{max-width:1100px;margin:18px auto 0;padding:0 20px}
+  .vendorbar h2{font-size:12px;font-family:var(--mono);letter-spacing:.16em;text-transform:uppercase;color:#6b7c8e;margin:0 0 8px}
+  .vendors{display:flex;flex-wrap:wrap;gap:6px}
+  .vendors button{font-family:var(--sans);font-size:13px;padding:6px 11px;border-radius:5px;border:1px solid var(--line);background:var(--card);color:var(--tag-ink);cursor:pointer}
+  .vendors button small{font-family:var(--mono);color:#8b99a8;margin-left:5px;font-size:11px}
+  .vendors button:hover{border-color:var(--blue);color:var(--blue)}
+  .vendors button[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+  .vendors button[aria-pressed="true"] small{color:#cfe3f7}
+
+  /* ---------- results ---------- */
+  main{max-width:1100px;margin:0 auto;padding:10px 20px 80px}
+  .group{margin-top:30px}
+  .group-h{display:flex;align-items:baseline;gap:12px;border-bottom:2px solid var(--blue);padding-bottom:6px;margin-bottom:0}
+  .group-h h2{font-size:19px;font-weight:700;font-stretch:108%;margin:0;color:var(--blue-dark)}
+  .group-h .n{font-family:var(--mono);font-size:12px;color:#6b7c8e}
+  .driver{background:var(--card);border:1px solid var(--line);border-top:none;padding:14px 16px;display:grid;grid-template-columns:minmax(260px,1.1fr) 1.6fr;gap:8px 24px}
+  .driver:first-of-type{border-top:1px solid var(--line)}
+  .d-left{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+  .d-name{font-weight:650;font-size:15px;line-height:1.35}
+  .badges{display:flex;gap:5px;flex-wrap:wrap}
+  .badge{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:3px;background:var(--tag-bg);color:var(--tag-ink);border:1px solid var(--line)}
+  .badge.eth{background:#e7f0fa;border-color:#cadcef;color:#0054a6}
+  .badge.usb{background:#eee9f7;border-color:#ddd3ef;color:#5b3e9e}
+  .badge.can{background:#fdf0e6;border-color:#f5dcc7;color:#9a5410}
+  .badge.pop{background:#fff4d6;border-color:#eedca2;color:#8a6400;font-weight:600}
+  .d-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .report{font-family:var(--mono);font-size:11px;color:#8b99a8;text-decoration:none;border-bottom:1px dotted #b9c4cf}
+  .report:hover{color:var(--blue);border-color:var(--blue)}
+  .pdf{
+    display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:12.5px;font-weight:600;
+    color:#fff;background:var(--blue);text-decoration:none;padding:7px 12px;border-radius:5px;
+  }
+  .pdf:hover{background:var(--blue-dark)}
+  .pdf svg{flex:none}
+  .d-right{font-family:var(--mono);font-size:13px;color:var(--tag-ink);line-height:1.65;align-self:center}
+  .d-right .lbl{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#8b99a8;margin-bottom:3px}
+  .note{display:block;margin-top:5px;font-family:var(--sans);font-size:12.5px;color:#6b7c8e;font-style:italic}
+  .empty{margin:60px auto;text-align:center;color:#6b7c8e}
+  .empty .big{font-family:var(--mono);font-size:15px;color:var(--ink);margin-bottom:6px}
+
+  footer{border-top:3px solid var(--blue);background:var(--blue-deep)}
+  footer .inner{max-width:1100px;margin:0 auto;padding:22px 20px;font-size:13px;color:#b9d2e8}
+  footer a{color:#8fc1ee}
+  footer code{color:#d4e4f3}
+
+  @media (max-width:760px){
+    .driver{grid-template-columns:1fr}
+    .count{margin-left:0;width:100%}
+  }
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
+  :focus-visible{outline:3px solid #8fc1ee;outline-offset:2px}
+</style>
+</head>
+<body>
+
+<div class="topstrip">
+  <div class="inner">
+    <a href="mailto:sales@weintekusa.com">sales@weintekusa.com</a>
+    <span>Order by Phone: 1-425-488-1100</span>
+  </div>
+</div>
+
+<header>
+  <div class="plate">
+    <div class="plate-top">
+      <div>
+        <p class="eyebrow">EasyBuilder Pro · Communication Drivers</p>
+        <h1>Weintek HMI <span class="accent">Driver Index</span></h1>
+      </div>
+      <nav class="plate-links">
+        <a href="https://www.weintek.com/globalw/Software/PLC.htm" target="_blank" rel="noopener">Official driver search ↗</a>
+        <a href="https://forum.weintekusa.com/pub/supported-devices" target="_blank" rel="noopener">Original list ↗</a>
+      </nav>
+    </div>
+    <p class="sub">Type your PLC model (e.g. <em>CompactLogix</em>, <em>FX5U</em>, <em>S7-1200</em>, <em>Micro850</em>) to find the recommended driver and download its connection guide.</p>
+  </div>
+</header>
+
+<div class="searchbar">
+  <div class="searchwrap">
+    <div class="searchbox">
+      <span class="lens" aria-hidden="true">⌕</span>
+      <input id="q" type="search" placeholder="Search PLC model, driver, or manufacturer…" autocomplete="off"
+             role="combobox" aria-expanded="false" aria-controls="suggest" aria-autocomplete="list"
+             aria-label="Search PLC model, driver, or manufacturer">
+      <span class="kbd" aria-hidden="true">/</span>
+      <button class="clear" id="clearBtn" aria-label="Clear search">×</button>
+      <div class="suggest" id="suggest" role="listbox" aria-label="Search suggestions"></div>
+    </div>
+    <div class="conn-filters" role="group" aria-label="Filter by connection type">
+      <button class="chip" data-conn="all" aria-pressed="true">All</button>
+      <button class="chip" data-conn="eth" aria-pressed="false">Ethernet</button>
+      <button class="chip" data-conn="ser" aria-pressed="false">Serial / Other</button>
+      <button class="chip" data-conn="usb" aria-pressed="false">USB</button>
+      <button class="chip" data-conn="can" aria-pressed="false">CAN bus</button>
+    </div>
+    <span class="count" id="count"></span>
+  </div>
+</div>
+
+<div class="vendorbar">
+  <h2>Manufacturers</h2>
+  <div class="vendors" id="vendors"></div>
+</div>
+
+<main id="results" aria-live="polite"></main>
+
+<footer>
+  <div class="inner">
+    Unofficial, searchable rebuild of the WeintekUSA <a href="https://forum.weintekusa.com/pub/supported-devices" target="_blank" rel="noopener">Supported Devices</a> page.
+    All instruction PDFs link directly to <code>dl.weintek.com</code>. Less-common vendors are omitted — use the
+    <a href="https://www.weintek.com/globalw/Software/PLC.htm" target="_blank" rel="noopener">official Device Driver Search</a> for the complete list.
+    Not affiliated with Weintek. Spot an error? Open an issue on this repo.
+  </div>
+</footer>
+
+<script>
+const BASE = "https://dl.weintek.com/public/PLC_Connect_Guide/";
+
+// ↓ Change this to your GitHub repo (e.g. "https://github.com/yourname/weintek-driver-index")
+//   to enable the per-driver "Broken link?" issue reporting. Leave as-is to hide the links.
+const REPO_URL = "https://github.com/USERNAME/REPOSITORY";
+const REPORTING_ENABLED = !REPO_URL.includes("USERNAME");
+
+// Drivers flagged as the common starting point when one PLC family matches several drivers.
+// These are typical picks, not official guidance — the connection guide is always authoritative.
+const POPULAR = new Set([
+  "Rockwell EtherNet/IP (CompactLogix) – Free Tag Names",
+  "Rockwell EtherNet/IP (ControlLogix) – Free Tag Names",
+  "Rockwell Micro850 (Ethernet) – Free Tag Names",
+  "Siemens S7-1200/S7-1500 (S7CommPlus, Symbolic Addressing) (Ethernet)",
+  "Mitsubishi FX5U – Binary Mode (Ethernet)",
+  "OMRON EtherNet/IP (NJ/NX Series)",
+  "MODBUS TCP/IP",
+  "MODBUS RTU, RTU over TCP"
+]);
+
+// Normalize for punctuation/spacing-tolerant matching: "S7 1200" / "S7-1200" / "S71200" all align.
+const norm = s => s.toLowerCase().replace(/[^a-z0-9]+/g, "");
+
+// Shorthand technicians actually type → terms that exist in the data.
+const ALIASES = {
+  "ab": "allen-bradley",
+  "a-b": "allen-bradley",
+  "clx": "controllogix",
+  "eip": "ethernet/ip",
+  "enet": "ethernet",
+  "mitsu": "mitsubishi",
+  "ad": "automation direct"
+};
+
+// [vendor, driver name, pdf filename, supported models, optional note]
+const DRIVERS = [
+// Allen-Bradley / Rockwell
+["Allen-Bradley (Rockwell)","Rockwell EtherNet/IP (CompactLogix)","Rockwell_EtherNet_IP_CompactLogix.pdf","ControlLogix, CompactLogix, FlexLogix (Ethernet)"],
+["Allen-Bradley (Rockwell)","Rockwell EtherNet/IP (CompactLogix) – Free Tag Names","Rockwell_EtherNet_IP_CompactLogix_Free_Tag_Names.pdf","CompactLogix, FlexLogix (Ethernet)"],
+["Allen-Bradley (Rockwell)","Rockwell EtherNet/IP (ControlLogix) – Free Tag Names","Rockwell_EtherNet_IP_ControlLogix_Free_Tag_Names.pdf","ControlLogix, CompactLogix, FlexLogix (Ethernet); CompactLogix 1768-L43 / 1768-L45 with 1768-ENBT/A Ethernet module"],
+["Allen-Bradley (Rockwell)","Rockwell CompactLogix – Free Tag Names","Rockwell_CompactLogix_Free_Tag_Names.pdf","ControlLogix, CompactLogix, FlexLogix — CH0 DF1"],
+["Allen-Bradley (Rockwell)","Rockwell CompactLogix / FlexLogix","Rockwell_CompactLogix_FlexLogix.pdf","ControlLogix, CompactLogix, FlexLogix — CH0 DF1"],
+["Allen-Bradley (Rockwell)","Rockwell DF1","Rockwell_DF1.pdf","MicroLogix 1000, 1100, 1200, 1400, 1500; SLC 5/01, 5/02, 5/03, 5/04, 5/05"],
+["Allen-Bradley (Rockwell)","Rockwell DF1 (BCC)","Rockwell_DF1_BCC.pdf","MicroLogix 1000, 1100, 1200, 1400, 1500; SLC 5/01, 5/02, 5/03, 5/04, 5/05"],
+["Allen-Bradley (Rockwell)","Rockwell DH485","Rockwell_DH485.pdf","MicroLogix 1000, 1100, 1200, 1400, 1500; SLC 5/01, 5/02, 5/03, 5/04, 5/05"],
+["Allen-Bradley (Rockwell)","Rockwell EtherNet/IP (DF1)","Rockwell_EtherNet_IP_DF1.pdf","MicroLogix 1100, 1400, SLC 5/05 Ethernet port; MicroLogix 1000, 1200, 1500, SLC 5/03, 5/04 with 1761-NET-ENI"],
+["Allen-Bradley (Rockwell)","Rockwell PLC5","Rockwell_PLC5.pdf","Rockwell PLC-5"],
+["Allen-Bradley (Rockwell)","Rockwell Micro850 (Ethernet) – Free Tag Names","Rockwell_Micro850_Ethernet_Free_Tag_Names.pdf","Micro820 / Micro850 Ethernet module"],
+["Allen-Bradley (Rockwell)","Rockwell Micro850 – Free Tag Names","Rockwell_Micro850_Free_Tag_Names.pdf","Micro820 / Micro850"],
+// Automation Direct
+["Automation Direct","Automation Direct Productivity Series","Automation_Direct_Productivity_Series.pdf","Productivity Series PLCs"],
+// Beckhoff
+["Beckhoff","Beckhoff TwinCAT 3 ADS/AMS (Ethernet)","Beckhoff_TwinCAT_3_ADS_AMS_Ethernet.pdf","CX8000, CX90x0, CX1010, CX5010, CX1020, CX2020, CX2030, CX2040, CP62xx, CPxxxx, C6920, CP6930, C65xx, C69xx"],
+["Beckhoff","Beckhoff TwinCAT PLC – Free Tag Names (Ethernet)","Beckhoff_TwinCAT_PLC_Free_Tag_Names_Ethernet.pdf","CX8000, CX90x0, CX1010, CX5010, CX1020, CX2020, CX2030, CX2040, CP62xx, CPxxxx, C6920, CP6930, C65xx, C69xx","Communication delay after HMI start may be required for CX8090."],
+["Beckhoff","Beckhoff Embedded PC","Beckhoff_Embedded_PC.pdf","Intel CX10x0, CX50x0 and TwinCAT"],
+["Beckhoff","Beckhoff ADS/AMS (Ethernet)","Beckhoff_ADS_AMS_Ethernet.pdf","TwinCAT"],
+// CODESYS
+["CODESYS","CODESYS V2 (Absolute Addressing) (Ethernet)","CODESYS_V2_Absolute_Addressing_Ethernet.pdf","CODESYS V2.2 runtimes"],
+["CODESYS","CODESYS V2 (Symbolic Addressing)","CODESYS_V2_Symbolic_Addressing.pdf","CODESYS V2 runtimes"],
+["CODESYS","CODESYS V3 (Ethernet)","CODESYS_V3_Ethernet.pdf","CODESYS V3 runtimes; LTI MOTION MO CM-3 / MO CM-6; Hitachi EH150","May work with: ABB AC500."],
+// Delta
+["Delta Electronics","DELTA AH500","DELTA_AH500.pdf","Delta AH500"],
+["Delta Electronics","DELTA AS300 / DVP-ES3 MODBUS TCP/IP","DELTA_AS300_DVP_ES3_MODBUS_TCP_IP.pdf","Delta AS300, DVP-ES3"],
+["Delta Electronics","DELTA AS300 / DVP-ES3 MODBUS RTU/ASCII","DELTA_AS300_DVP_ES3_MODBUS_RTU_ASCII.pdf","Delta AS300, DVP-ES3"],
+["Delta Electronics","DELTA DVP","DELTA_DVP.pdf","Delta DVP series"],
+["Delta Electronics","DELTA DVPEN01-SL (Ethernet)","DELTA_DVPEN01_SL_Ethernet.pdf","Delta DVPEN01-SL, DVP32ES200RE"],
+["Delta Electronics","DELTA EtherNet/IP (AS Series)","DELTA_Ethernet_IP_AS_Series.pdf","Delta AS332T"],
+// GE
+["GE Automation","GE SNP-X","GE_SNP_X.pdf","GE 90-30, 90 Micro, VersaMax series; 90-70 series with CMM711 module"],
+["GE Automation","GE 90-30 Series (Ethernet)","GE_90_30_Series_Ethernet.pdf","GE 90-30 series, CPU model 374plus"],
+["GE Automation","GE CMM","GE_CMM.pdf","GE CMM"],
+["GE Automation","GE RX3i","GE_RX3i.pdf","GE RX3i"],
+["GE Automation","GE VersaMax (Ethernet)","GE_VersaMax_Ethernet.pdf","GE VersaMax controllers"],
+// IDEC
+["IDEC","IDEC Micro","IDEC_Micro.pdf","IDEC Micro3, Micro3C, OpenNet Controller series"],
+["IDEC","IDEC MicroSmart","IDEC_MicroSmart.pdf","IDEC MicroSmart, SmartAxis series"],
+["IDEC","IDEC MicroSmart FC6A Series","IDEC_MicroSmart_FC6A_Series.pdf","IDEC MicroSmart FC5A / FC6A series"],
+// Keyence
+["KEYENCE","KEYENCE KV-10/16/24/40/80 / Visual KV Series","KEYENCE_KV_10_16_24_40_80_Visual_KV_Series.pdf","KEYENCE KV series, KV16–80"],
+["KEYENCE","KEYENCE KV-3000","KEYENCE_KV_3000.pdf","KEYENCE KV-3000"],
+["KEYENCE","KEYENCE KV-8000 (Symbolic) (Ethernet)","KEYENCE_KV_8000_Symbolic_Ethernet.pdf","KEYENCE KV-8000"],
+["KEYENCE","KEYENCE KV-L20V/700/1000/3000/5000/Nano Series (KV Studio Mode)","KEYENCE_KV_L20V_700_1000_3000_5000_Nano_Series_KV_Studio_Mode.pdf","KV-L20V, 700, 1000, 3000, 5000 series; KV Nano series"],
+["KEYENCE","KEYENCE KV-L20V/700/1000/3000/5000/7500/8000/Nano Series (Ethernet)","KEYENCE_KV_L20V_700_1000_3000_5000_7500_8000_Nano_Series_Ethernet.pdf","KV-L20V, 700, 1000, 3000, 5000, 7500, 8000 series; KV Nano series"],
+["KEYENCE","KEYENCE KV-L20V/700/1000/3000/5000/7500/8000/Nano Series","KEYENCE_KV_L20V_700_1000_3000_5000_7500_8000_Nano_Series.pdf","KV-L20V, 700, 1000, 3000, 5000, 7500, 8000 series; KV Nano series"],
+// Koyo
+["Koyo Electronics","KOYO Do-more (Ethernet)","KOYO_Do_more_Ethernet.pdf","Do-more H2 Series PLC Ethernet port"],
+["Koyo Electronics","KOYO Do-more","KOYO_Do_more.pdf","Do-more H2 Series PLC"],
+["Koyo Electronics","KOYO CLICK V3 MODBUS TCP/IP","KOYO_CLICK_V3_MODBUS_TCP_IP.pdf","KOYO CLICK C2 series","May work with: KOYO CLICK C0-10*RE-D."],
+["Koyo Electronics","KOYO CLICK","KOYO_CLICK.pdf","KOYO CLICK PLC series"],
+["Koyo Electronics","KOYO CLICK (Ethernet)","KOYO_CLICK_Ethernet.pdf","KOYO CLICK C0 series"],
+["Koyo Electronics","KOYO DIRECT (K-Sequence)","KOYO_DIRECT_K_Sequence.pdf","DirectLogic DL05, DL06, DL105, DL205, DL305, DL405 series"],
+["Koyo Electronics","KOYO Ethernet","KOYO_Ethernet.pdf","DirectLogic series with H0-ECOM100 / H2-ECOM100"],
+// Mitsubishi
+["Mitsubishi Electric","Mitsubishi F930GOT Server","Mitsubishi_F930GOT_Server.pdf","F930GOT general-purpose communication Type 1"],
+["Mitsubishi Electric","Mitsubishi AJ71 (Format 4)","Mitsubishi_AJ71_Format_4.pdf","A series PLC with AJ71C24 communication module (Computer Link protocol)"],
+["Mitsubishi Electric","Mitsubishi AJ71","Mitsubishi_AJ71.pdf","A series PLC with AJ71C24 communication module (Computer Link protocol)"],
+["Mitsubishi Electric","Mitsubishi A173UH/A2A/A2U/A2AS/A2USH/A3U","Mitsubishi_A173UH_A2A_A2U_A2AS_A2USH_A3U.pdf","A173UH, A2A, A2U, A2AS, A2USH, A3U"],
+["Mitsubishi Electric","Mitsubishi A1S/A2N","Mitsubishi_A1S_A2N.pdf","A1S, A2N"],
+["Mitsubishi Electric","Mitsubishi A2US","Mitsubishi_A2US.pdf","A2US"],
+["Mitsubishi Electric","Mitsubishi A3A/A3N/A1SH/A2SH","Mitsubishi_A3A_A3N_A1SH_A2SH.pdf","A3A, A3N, A1SH, A2SH"],
+["Mitsubishi Electric","Mitsubishi AJ71 (AnA/AnU CPU)","Mitsubishi_AJ71_AnA_AnU_CPU.pdf","AJ71 (AnA / AnU CPU)"],
+["Mitsubishi Electric","Mitsubishi Alpha2","Mitsubishi_Alpha2.pdf","Alpha2 series"],
+["Mitsubishi Electric","Mitsubishi FX232/485BD","Mitsubishi_FX232_485BD.pdf","FX0N/FX2/FX2N COM via FX2N-485-BD, FX2N-232-BD, FX1N-485-BD, FX1N-232-BD, FX3U-485-ADP/BD"],
+["Mitsubishi Electric","Mitsubishi FX0S/FX0N/FX1S/FX1N/FX2/FX3SA","Mitsubishi_FX0S_FX0N_FX1S_FX1N_FX2_FX3SA.pdf","FX0S, FX0N, FX1S, FX1N, FX2, FX3S, FX3SA"],
+["Mitsubishi Electric","Mitsubishi FX2N","Mitsubishi_FX2N.pdf","FX2N series PLC"],
+["Mitsubishi Electric","Mitsubishi FX2N-10GM/20GM","Mitsubishi_FX2N_10GM_20GM.pdf","FX2N-10GM / 20GM"],
+["Mitsubishi Electric","Mitsubishi FX3U/FX3G/FX3GA","Mitsubishi_FX3U_FX3G_FX3GA.pdf","FX3U, FX3UC, FX3G, FX3S, FX3GA"],
+["Mitsubishi Electric","Mitsubishi FX3U (Ethernet)","Mitsubishi_FX3U_Ethernet.pdf","FX series with FX3U-ENET or FX3U-ENET-ADP module"],
+["Mitsubishi Electric","Mitsubishi FX5U","Mitsubishi_FX5U.pdf","FX5U, FX5UC"],
+["Mitsubishi Electric","Mitsubishi FX5U – ASCII Mode (Ethernet)","Mitsubishi_FX5U_ASCII_Mode_Ethernet.pdf","FX5U Ethernet module"],
+["Mitsubishi Electric","Mitsubishi FX5U – Binary Mode (Ethernet)","Mitsubishi_FX5U_Binary_Mode_Ethernet.pdf","FX5U Ethernet module"],
+["Mitsubishi Electric","Mitsubishi L6ADP","Mitsubishi_L6ADP.pdf","L6ADP CPU RS232 series port"],
+["Mitsubishi Electric","Mitsubishi M70 (Ethernet)","Mitsubishi_M70_Ethernet.pdf","M70 (QJ71E71 + Q04A CPU)"],
+["Mitsubishi Electric","Mitsubishi M80 (Ethernet)","Mitsubishi_M80_Ethernet.pdf","M80 (QJ71E71 + Q26UDH CPU)"],
+["Mitsubishi Electric","Mitsubishi M80 CNC (Ethernet)","Mitsubishi_M80_CNC_Ethernet.pdf","M80 CNC (Ethernet)"],
+["Mitsubishi Electric","Mitsubishi MR J3/J4 A","Mitsubishi_MR_J3_J4_A.pdf","MR-J3 / MR-J4 A servo"],
+["Mitsubishi Electric","Mitsubishi MR-MQ100 (Ethernet)","Mitsubishi_MR_MQ100_Ethernet.pdf","MR-MQ100 (Ethernet)"],
+["Mitsubishi Electric","Mitsubishi Q00/Q00UJ/Q01/QJ71","Mitsubishi_Q00_Q00UJ_Q01_QJ71.pdf","Q series with QJ71C24 module; Q00, Q00J, Q00UJ, Q01, Q02H, Q06H, Q12H, Q25H, Q12PH, Q25PH CPU port"],
+["Mitsubishi Electric","Mitsubishi Q00J","Mitsubishi_Q00J.pdf","Q00J CPU"],
+["Mitsubishi Electric","Mitsubishi Q00U/Q01U/Q02U/QnUD/QnUDH","Mitsubishi_Q00U_Q01U_Q02U_QnUD_QnUDH.pdf","Q00U, Q01U, Q02U, Q03UD, Q04UDH, Q06UDH, Q10UDH, Q13UDH, Q20UDH, Q26UDH, Q00UJ CPU"],
+["Mitsubishi Electric","Mitsubishi Q00UJ/QnU/QnUD/QnUDH/QnUDEH/L (mini USB)","Mitsubishi_Q00UJ_QnU_QnUD_QnUDH_QnUDEH_L_mini_USB.pdf","Q00UJ, Q00U, Q01U, Q02U, Q03UDE, Q03UD, Q04UDEH, Q20UDH, Q26UDEH, Q26UDH, L02, L26-BT USB port"],
+["Mitsubishi Electric","Mitsubishi Q02/02H","Mitsubishi_Q02_02H.pdf","Q02 / Q02H CPU port"],
+["Mitsubishi Electric","Mitsubishi Q06H","Mitsubishi_Q06H.pdf","Q06H CPU port"],
+["Mitsubishi Electric","Mitsubishi QJ71E71 (Ethernet)","Mitsubishi_QJ71E71_Ethernet.pdf","MELSEC-Q series (Q00J, Q00, Q01, Q02, Q02H, Q06H, Q12H, Q25H, Q12PH, Q25PH) with QJ71E71-100 Ethernet module"],
+["Mitsubishi Electric","Mitsubishi QnA Series","Mitsubishi_QnA_Series.pdf","QnA series"],
+["Mitsubishi Electric","Mitsubishi MELSEC-Q/L – ASCII Mode (Ethernet)","Mitsubishi_MELSEC_Q_L_ASCII_Mode_Ethernet.pdf","Q series (Q03UDE, Q04UDEH, Q06UDEH, Q10UDEH); MELSEC-Q/L protocol via CPU Ethernet interface or Ethernet module"],
+["Mitsubishi Electric","Mitsubishi MELSEC-Q/L – Binary Mode (Ethernet)","Mitsubishi_MELSEC_Q_L_Binary_Mode_Ethernet.pdf","Q series (Q03UDE, Q04UDEH, Q06UDEH, Q10UDEH, Q13UDEH, Q20UDEH, Q26UDEH, Q02UD); L series (L02, L26-BT); via CPU Ethernet interface or module"],
+["Mitsubishi Electric","Mitsubishi iQ-R Series (Ethernet)","Mitsubishi_iQ_R_Series_Ethernet.pdf","R00–R120 (incl. EN, P, SF, PSF variants) CPU Ethernet module; M80 CNC controller"],
+["Mitsubishi Electric","Mitsubishi iQ-R Series – Binary Mode (Symbolic Addressing) (Ethernet)","Mitsubishi_iQ_R_Series_Binary_Mode_Symbolic_Addressing_Ethernet.pdf","R00–R120 (incl. EN, P, SF, PSF variants) CPU Ethernet module; M80 CNC controller"],
+// Omron
+["Omron","OMRON C/CQM1 Series","OMRON_C_CQM1_Series.pdf","Omron C, CPM, CPL, CQM series (Host Link protocol)"],
+["Omron","OMRON Host Link","OMRON_Host_Link.pdf","Omron C, CPM, CPL, CQM series (Host Link protocol)"],
+["Omron","OMRON Ethernet (FINS/TCP)","OMRON_Ethernet_FINS_TCP.pdf","Ethernet FINS devices"],
+["Omron","OMRON CP Series (USB)","OMRON_CP_Series_USB.pdf","CP1E CPU module USB port"],
+["Omron","OMRON CJ/CS/CP","OMRON_CJ_CS_CP.pdf","CP1E, CP2E, CP1L, CP1H, CJ1M, CJ2M, CJ1H, CJM1G, CS1H, CS1G (Host Link FINS); supports Extend Addressing Mode"],
+["Omron","OMRON CJ/CS/CP (Ethernet – FINS/TCP)","OMRON_CJ_CS_CP_Ethernet_FINS_TCP.pdf","CJ series, CS series, CP series + Ethernet module"],
+["Omron","OMRON Ethernet","OMRON_Ethernet.pdf","CJ series, CS series, CP series + Ethernet module"],
+["Omron","OMRON E5CN/E5EZ/E5ZN","OMRON_E5CN_E5EZ_E5ZN.pdf","E5CN temperature controllers with comm option; E5EN/CN/GN/EZ/ZN series"],
+["Omron","OMRON EtherNet/IP (NJ/NX Series)","OMRON_EtherNet_IP_NJ_NX_Series.pdf","NJ / NX1P series PLC","May work with: Omron NX102."],
+// Panasonic
+["Panasonic","Panasonic FP (Ethernet)","Panasonic_FP_Ethernet.pdf","FP series, incl. FP-X with AFPX-COM5"],
+["Panasonic","Panasonic FP/KW","Panasonic_FP_KW.pdf","NAIS (Matsushita) FP/KW series: FP-X, FP-XH, FP-Σ, FP0, FP1, FP2, FP2SH, FP10SH, FP7"],
+["Panasonic","Panasonic FP2 (Ethernet)","Panasonic_FP2_Ethernet.pdf","FP2 series: FP2, FP2SH, FP10SH CPU"],
+["Panasonic","Panasonic MEWTOCOL7","Panasonic_MEWTOCOL7.pdf","GT series, FP7"],
+["Panasonic","Panasonic Eco-Power Meters","Panasonic_Eco_Power_Meters.pdf","KW1M, KW1M-A, KW9M, KW9M-A"],
+["Panasonic","Panasonic MINAS A4","Panasonic_MINAS_A4.pdf","MINAS A4 series servo drive"],
+["Panasonic","Panasonic MINAS A5","Panasonic_MINAS_A5.pdf","MINAS A5 series servo drive"],
+["Panasonic","Panasonic MINAS-BL KV Series","Panasonic_MINAS_BL_KV_series.pdf","MINAS-BL KV series"],
+// Schneider
+["Schneider Electric","Schneider UniTelway","Schneider_UniTelway.pdf","Modicon TSX Micro, Nano, Neza series"],
+["Schneider Electric","Schneider IMS SERVO","Schneider_IMS_SERVO.pdf","Lexium MDrive"],
+["Schneider Electric","Schneider M340/M580 Series (Symbolic Addressing) (Ethernet)","Schneider_M340_M580_Series_Symbolic_Addressing_Ethernet.pdf","M340 / M580 series (firmware v2.70 or later)"],
+["Schneider Electric","Schneider IMS MOTION","Schneider_IMS_MOTION.pdf","MDrivePlus"],
+["Schneider Electric","Schneider MODBUS RTU","Schneider_MODBUS_RTU.pdf","Modbus RTU devices (e.g. M221)"],
+["Schneider Electric","Schneider MODBUS TCP/IP","Schneider_MODBUS_TCP_IP.pdf","Modbus TCP/IP devices (e.g. M221)"],
+["Schneider Electric","Schneider PowerLogic Modbus RTU","Schneider_PowerLogic_Modbus_RTU.pdf","PowerLogic, Modbus RTU"],
+["Schneider Electric","Schneider PowerLogic Modbus TCP/IP","Schneider_PowerLogic_Modbus_TCP_IP.pdf","PowerLogic, Modbus TCP/IP"],
+["Schneider Electric","Schneider SoMachine M Series (Ethernet)","Schneider_SoMachine_M_Series_Ethernet.pdf","SoMachine M238, M241, M251, M258"],
+["Schneider Electric","Schneider Zelio","Schneider_Zelio.pdf","Zelio Logic"],
+// Siemens
+["Siemens","Siemens LOGO (Ethernet)","Siemens_LOGO_Ethernet.pdf","LOGO! 0BA0, 0BA1, 0BA7, 0BA8"],
+["Siemens","Siemens S7-200 SMART PPI","Siemens_S7_200_SMART_PPI.pdf","S7-200 SMART series PLC"],
+["Siemens","Siemens S7-200 SMART (Ethernet)","Siemens_S7_200_SMART_Ethernet.pdf","S7-200 SMART series Ethernet module"],
+["Siemens","Siemens S7-1200 (Symbolic Addressing) (Ethernet)","Siemens_S7_1200_Symbolic_Addressing_Ethernet.pdf","S7-1200 series Ethernet"],
+["Siemens","Siemens S7-1200/S7-1500 (S7CommPlus, Symbolic Addressing) (Ethernet)","Siemens_S7_1200_S7_1500_S7CommPlus_Symbolic_Addressing_Ethernet.pdf","S7-1200 firmware V4.5; S7-1500 firmware V2.9.2; ET200SP series; SIMATIC PLCSIM Advanced V3.0 / V4.0"],
+["Siemens","Siemens S7-200 (Ethernet)","Siemens_S7_200_Ethernet.pdf","S7-200 (CPU212/214/215/216/221/222/224/226/226XM) with CP243-1 Ethernet module"],
+["Siemens","Siemens S7-200 (VD any address)","Siemens_S7_200_VD_any_address.pdf","S7-200 series (CPU212/214/215/216/221/222/224/226/226XM)"],
+["Siemens","Siemens S7-200 PPI","Siemens_S7_200_PPI.pdf","S7-200 series (CPU212/214/215/216/221/222/224/226/226XM)"],
+["Siemens","Siemens S7-200","Siemens_S7_200.pdf","S7-200 series (CPU212/214/215/216/221/222/224/226/226XM)"],
+["Siemens","Siemens S7-300/ET200S (Ethernet)","Siemens_S7_300_ET200S_Ethernet.pdf","S7-300 Ethernet PLCs: CP-343-1 module, CPU315-2 PN/DP, CPU317-2 PN/DP, CPU319-3 PN/DP, ET200S"],
+["Siemens","Siemens S7-300","Siemens_S7_300.pdf","S7-300 series with PC Adapter"],
+["Siemens","Siemens S7-300 MPI","Siemens_S7_300_MPI.pdf","S7-300 series"],
+["Siemens","Siemens S7-1200/S7-1500 (Absolute Addressing) (Ethernet)","Siemens_S7_1200_S7_1500_Absolute_Addressing_Ethernet.pdf","S7-300 / S7-1200 / S7-1500 series; ET200SP series"],
+["Siemens","Siemens S7-300/S7-400 (ISO Ethernet)","Siemens_S7_300_S7400_ISO_Ethernet.pdf","S7-300 Ethernet PLCs: CP-343-1, CPU315-2 PN/DP, CPU317-2 PN/DP, CPU319-3 PN/DP, ET200S, CP-443-1"],
+["Siemens","Siemens S7-400 (Ethernet)","Siemens_S7_400_Ethernet.pdf","S7-400 Ethernet PLC"],
+["Siemens","Siemens TI505","Siemens_TI505.pdf","SIMATIC TI505 series: TI520, TI525, TI530, TI535, TI545, TI555, TI560, TI565, TI575 (NITP, point-to-point); CTI 2500 series: C100, C200, C300, C400"],
+["Siemens","Siemens TI505 (Ethernet)","Siemens_TI505_Ethernet.pdf","SIMATIC TI505 series with Ethernet module: TI520–TI575; CTI 2500 series: C100, C200, C300, C400"],
+["Siemens","Siemens TI565","Siemens_TI565.pdf","SIMATIC TI565"],
+// WAGO
+["WAGO","BACnet/IP (WAGO)","BACnet_IP.pdf","WAGO 750-830, 750-881"],
+["WAGO","MODBUS TCP/IP (WAGO)","MODBUS_TCP_IP.pdf","WAGO 750-830"],
+["WAGO","KONNEX KNXnet/IP","KONNEX_KNXnet_IP.pdf","WAGO 750-849"],
+// Weintek
+["Weintek","Weintek Built-in CODESYS","Weintek_Built_in_CODESYS.pdf","Weintek built-in CODESYS HMI"],
+["Weintek","Weintek Remote IO (CANopen)","Weintek_Remote_IO_CANopen.pdf","Weintek Remote IO (iR-COP)"],
+["Weintek","Weintek Remote IO (MODBUS TCP/IP)","Weintek_Remote_IO_MODBUS_TCP_IP.pdf","Weintek Remote IO (iR-ETN)"],
+// Generic protocols — HMI as master/client
+["Generic protocols (HMI as master)","BACnet/IP","BACnet_IP.pdf","BACnet/IP server devices"],
+["Generic protocols (HMI as master)","BACnet/MSTP","BACnet_MSTP.pdf","BACnet/MSTP slave devices"],
+["Generic protocols (HMI as master)","Barcode Scanner CDC/POS Mode (USB)","Barcode_Scanner_CDC_POS_Mode_USB.pdf","USB barcode scanners (CDC / POS mode)"],
+["Generic protocols (HMI as master)","Barcode/Keyboard (USB/COM)","Barcode_Keyboard_USB_COM.pdf","Barcode scanners and keyboards (USB / COM)"],
+["Generic protocols (HMI as master)","CAN Bus 2.0A/2.0B General and SAE J1939","CAN_Bus_20A_20B_General_and_SAE_J1939.pdf","CAN Bus 2.0A, CAN Bus 2.0B, SAE J1939"],
+["Generic protocols (HMI as master)","CAN Bus 2.0A/2.0B General and SAE J1939 Symbolic","CAN_Bus_20A_20B_General_and_SAE_J1939_Symbolic.pdf","CAN Bus 2.0A, CAN Bus 2.0B, SAE J1939"],
+["Generic protocols (HMI as master)","CAN Bus CANopen Slave","CAN_Bus_CANopen_Slave.pdf","CAN Bus 2.0A / 2.0B devices","May work with: IFM CR710S."],
+["Generic protocols (HMI as master)","MODBUS ASCII","MODBUS_ASCII.pdf","Modbus ASCII slaves"],
+["Generic protocols (HMI as master)","MODBUS RTU, RTU over TCP","MODBUS_RTU_RTU_over_TCP.pdf","Modbus RTU slaves","May work with: Hitachi WJ200."],
+["Generic protocols (HMI as master)","MODBUS RTU (Adjustable)","MODBUS_RTU_Adjustable.pdf","Modbus RTU slaves"],
+["Generic protocols (HMI as master)","MODBUS TCP/IP","MODBUS_TCP_IP.pdf","Modbus TCP/IP slaves","May work with: ControlByWeb X600M, Julabo Magio MX."],
+["Generic protocols (HMI as master)","MODBUS TCP/IP 32Bit","MODBUS_TCP_IP_32Bit.pdf","Modbus TCP/IP slaves (32-bit)"],
+["Generic protocols (HMI as master)","ODVA EtherNet/IP (Explicit Messaging)","ODVA_EtherNet_IP_Explicit_Messaging.pdf","Crevis EtherNet/IP NA-9188"],
+["Generic protocols (HMI as master)","ODVA General EtherNet/IP (Implicit Messaging)","ODVA_General_EtherNet_IP_Implicit_Messaging.pdf","ODVA general EtherNet/IP implicit messaging devices"],
+["Generic protocols (HMI as master)","OPC UA Client","OPC_UA_Client.pdf","Weintek OPC UA Server, Unified Automation, Prosys, Kepware, Weidmüller UC20-M3000"],
+// HMI as server/slave
+["Generic protocols (HMI as server)","BACnet/IP Server","BACnet_IP_Server.pdf","BACnet/IP client devices"],
+["Generic protocols (HMI as server)","BACnet/MSTP Server","BACnet_MSTP_Server.pdf","BACnet/MSTP client devices","Exclusive to cMT / cMT-X series HMI."],
+["Generic protocols (HMI as server)","MODBUS ASCII Server","MODBUS_ASCII_Server.pdf","Modbus ASCII masters"],
+["Generic protocols (HMI as server)","MODBUS Server (COM/Ethernet)","MODBUS_Server_COM_Ethernet.pdf","Modbus TCP/IP clients"],
+["Generic protocols (HMI as server)","ODVA EtherNet/IP Server (Explicit Messaging)","ODVA_EtherNet_IP_Server_Explicit_Messaging.pdf","ODVA EtherNet/IP explicit messaging clients","Exclusive to cMT / cMT-X series HMI."],
+// ABB
+["ABB","ABB AC500","ABB_AC500.pdf","ABB AC500"],
+["ABB","ABB EtherNet/IP (Implicit Messaging)","ABB_EtherNet_IP_Implicit_Messaging.pdf","ABB EtherNet/IP (implicit messaging)"],
+["ABB","ABB NextMove ES","ABB_NextMove_ES.pdf","ABB NextMove ES"],
+["ABB","ABB TOTALFLOW FCU","ABB_TOTALFLOW_FCU.pdf","ABB TOTALFLOW FCU"],
+// Bosch Rexroth
+["Bosch Rexroth","Bosch Rexroth","Bosch_Rexroth.pdf","Bosch Rexroth servo"],
+["Bosch Rexroth","Bosch Rexroth IndraDrive SIS (Absolute Addressing)","Bosch_Rexroth_IndraDrive_SIS_Absolute_Addressing.pdf","IndraDrive HCS02"],
+["Bosch Rexroth","Bosch Rexroth SIS (Symbolic Addressing)","Bosch_Roxroth_SIS_Symbolic_Addressing.pdf","IndraDrive HCS02"],
+["Bosch Rexroth","Bosch Rexroth IndraControl – Free Tag Names (Ethernet)","Bosch_Rexroth_IndraControl_Free_Tag_Names_Ethernet.pdf","IndraDrive HCS02"],
+["Bosch Rexroth","Bosch Rexroth SIS (Absolute Addressing)","Bosch_Rexroth_SIS_Absolute_Addressing.pdf","IndraDrive HCS02"],
+// Brother
+["Brother Industries","Brother Speedio (Ethernet)","Brother_Speedio_Ethernet.pdf","Brother Speedio (Ethernet)"],
+// Control Techniques
+["Control Techniques","KW ProConOS (Absolute Addressing)","KW_ProConOS_Absolute_Addressing.pdf","KW ProConOS"],
+["Control Techniques","KW ProConOS","KW_ProConOS.pdf","KW ProConOS"],
+["Control Techniques","Control Techniques SI-Ethernet Modbus TCP/IP","Control_Techniques_SI_Ethernet_Modbus_TCP_IP.pdf","Unidrive M400 with SI-Ethernet module"],
+// CTI
+["Control Technology Inc. (CTI)","Control Technology 2500 Series","Control_Technology_2500_Series.pdf","CTI 2500 series (Classic and Compact): C100, C200, C300, C400"],
+["Control Technology Inc. (CTI)","Control Technology 2500 Series (Ethernet)","Control_Technology_2500_Series_Ethernet.pdf","CTI 2500 series (Classic and Compact): C100, C200, C300, C400"],
+// Crouzet
+["Crouzet","CROUZET M3 (FBD)","CROUZET_M3_FBD.pdf","Crouzet M3 (FBD)"],
+["Crouzet","CROUZET M3 (LAD)","CROUZET_M3_LAD.pdf","Crouzet M3 (LAD)"],
+// Danfoss
+["Danfoss","Danfoss ECL Apex20","Danfoss_ECL_Apex20.pdf","ECL Apex20"],
+["Danfoss","Danfoss ECL Apex20 (Ethernet)","Danfoss_ECL_Apex20_Ethernet.pdf","ECL Apex20"],
+["Danfoss","Danfoss FC Series","Danfoss_FC_Series.pdf","FC051, FC100, FC200, FC300, VLT Micro Drive"],
+["Danfoss","Danfoss VLT2800 Series","Danfoss_VLT2800_Series.pdf","VLT2800 series"],
+// Eaton
+["Eaton","Eaton Moeller Easy 822","Eaton_Moeller_Easy_822.pdf","Moeller EASY 822-DC-TC relays"],
+// Emerson
+["Emerson","EMERSON Charge Module","EMERSON_Charge_Module.pdf","Emerson Charge Module"],
+["Emerson","EMERSON ControlWave (Ethernet) – Free Tag Names","EMERSON_ControlWave_Ethernet_Free_Tag_Names.pdf","ControlWave MICRO"],
+["Emerson","EMERSON PLC EC20","EMERSON_PLC_EC20.pdf","EC20 series (Modbus RTU protocol)"],
+["Emerson","EMERSON ROC800 Series – Free Tag Names","EMERSON_ROC800_Series_Free_Tag_Names.pdf","ROC800 series"],
+// Fanuc
+["Fanuc","Fanuc 0i/30i/31i/32i/35i Series","Fanuc_0i_30i_31i_32i_35i_Series.pdf","Fanuc 0i, 30i, 31i, 32i, 35i series"],
+["Fanuc","Fanuc 0i/30i/31i/32i/35i Series (Ethernet)","Fanuc_0i_30i_31i_32i_35i_Series_Ethernet.pdf","Fanuc 0i, 30i, 31i, 32i, 35i series"],
+// Fatek
+["Fatek Automation","FATEK FB/FBs/B1/B1z Series","FATEK_FB_FBs_B1_B1z.pdf","Fatek FB, FBs, B1, B1z series","FB MC series and FB MA series need the FB-DTBR converter."],
+// Fuji
+["Fuji Electric","Fuji NB Series","Fuji_NB_Series.pdf","Fuji NB series"],
+["Fuji Electric","Fuji SPH2000/3000 Standard Mode (Ethernet)","Fuji_SPH2000_3000_Standard_Mode_Ethernet.pdf","SPH2000 / SPH3000 series PLC with NP1L-ET1 Ethernet module"],
+["Fuji Electric","Fuji SPH2000/3000 IEC Mode (Ethernet)","Fuji_SPH2000_3000_IEC_Mode_Ethernet.pdf","SPH2000 / SPH3000 series PLC with NP1L-ET1 Ethernet module"],
+// Hitachi
+["Hitachi","Hitachi EH-SIO","Hitachi_EH_SIO.pdf","EH-SIO"],
+["Hitachi","Hitachi EHV Series (Ethernet)","Hitachi_EHV_Series_Ethernet.pdf","EHV series"],
+["Hitachi","Hitachi H/EH/EHV Series","Hitachi_H_EH_EHV_Series.pdf","H series, EH-150, Micro-EH, H20, H40, H64, H200, H250, H252, H300, H302, H700, H702, H1000, H1002, H2000, H4010"],
+// HUST
+["HUST","HUST H4X","HUST_H4X.pdf","Hust CNC Controller H4 series"],
+// Kuka
+["KUKA","KUKA EtherNet/IP (Implicit Messaging)","KUKA_EtherNet_IP_Implicit_Messaging.pdf","KR C4 COMPACT"],
+// Lenze
+["Lenze","Lenze","Lenze.pdf","Lenze 9300 / 8200 series, EPL10200"],
+["Lenze","CAN Bus CANopen Slave (Lenze)","CAN_Bus_CANopen_Slave.pdf","Lenze 8400"],
+// NMEA
+["NMEA","NMEA 0183","NMEA_0183.pdf","NMEA 0183 interface standard"],
+// Opto22
+["Opto 22","OPTO22 CONT Protocol (Ethernet)","OPTO22_CONT_Protocol_Ethernet.pdf","SNAP PAC system"],
+["Opto 22","OPTO22 MMIO Protocol (Ethernet)","OPTO22_MMIO_Protocol_Ethernet.pdf","SNAP PAC system"],
+// Parker
+["Parker Hannifin","Parker ACR9000","Parker_ACR9000.pdf","ACR9000"],
+["Parker Hannifin","Parker Compax3","Parker_Compax3.pdf","Compax3 servo drive"],
+["Parker Hannifin","Parker Compumotor 6K Series","Parker_Compumotor_6K_Series.pdf","Compumotor 6K series"],
+["Parker Hannifin","Parker SLVD Series","Parker_SLVD_Series.pdf","SLVD servo: SLVD1N, SLVD2N, SLVD5N, SLVD7N, SLVD10N, SLVD15N, SLVD17N"],
+// Schleicher
+["Schleicher","Schleicher XCS 20C","Schleicher_XCS_20C.pdf","XCS series, 20C model"],
+["Schleicher","Schleicher XCX 300/800","Schleicher_XCX_300_800.pdf","XCX 300 / 800"],
+// Epson
+["Epson","Epson Robot Controller","Epson_Robot_Controller.pdf","Epson robot controllers"],
+// Toshiba
+["Toshiba","TOSHIBA INVERTER VF","TOSHIBA_INVERTER_VF.pdf","Toshiba inverter protocol (ASCII code)"],
+["Toshiba","TOSHIBA T Series","TOSHIBA_T_Series.pdf","Toshiba T-series, S2E"],
+["Toshiba","TOSHIBA TOSVERT VF (EtherNet/IP)","TOSHIBA_TOSVERT_VF_EtherNet_IP.pdf","TOSVERT VF (EtherNet/IP)"],
+["Toshiba Machine","TOSHIBA MACHINE Provisor TC200","TOSHIBA_MACHINE_Provisor_TC200.pdf","Provisor TC200"],
+// Trio
+["Trio Motion","Trio MODBUS RTU, TCP/IP","Trio_MODBUS_RTU_TCP_IP.pdf","Trio Modbus RTU, TCP/IP"],
+["Trio Motion","Trio MODBUS RTU, TCP/IP (Mode 7)","Trio_MODBUS_RTU_TCP_IP_Mode_7.pdf","Trio Modbus RTU, TCP/IP (Mode 7)"],
+// Yamaha
+["Yamaha Motor","YAMAHA ERCD","YAMAHA_ERCD.pdf","Yamaha ERCD"],
+// Yaskawa
+["Yaskawa","YASKAWA DX100/DX200/FS100/YRC1000 Robot Controller (Ethernet)","YASKAWA_DX100_DX200_FS100_YRC1000_Robot_Controller_Ethernet.pdf","DX100, FS100, DX200, YRC1000, YRC1000micro"],
+["Yaskawa","YASKAWA MP Series – Extension (Ethernet)","YASKAWA_MP_Series_Extension_Ethernet.pdf","MP series"],
+["Yaskawa","YASKAWA MP Series – Memobus","YASKAWA_MP_Series_Memobus.pdf","MP2200, MP2300, MP2300S, MP9xx communication module"],
+["Yaskawa","YASKAWA MP Series SIO (Extension)","YASKAWA_MP_Series_SIO_Extension.pdf","MP2200, MP2300, MP2300S, MP9xx communication module"],
+["Yaskawa","YASKAWA MP Series Memobus (Ethernet)","YASKAWA_MP_Series_Memobus_Ethernet.pdf","MP2200, MP2300, MP2300S, MP9xx with 218IF-02 Ethernet module"],
+["Yaskawa","YASKAWA MP2300Siec (Ethernet)","YASKAWA_MP2300Siec_Ethernet.pdf","MP2300Siec"],
+["Yaskawa","YASKAWA MP3000 Series – Extension (Ethernet)","YASKAWA_MP3000_Series_Extension_Ethernet.pdf","MP3000"],
+// Yokogawa
+["Yokogawa","YOKOGAWA FA-M3 – Binary Mode (Ethernet)","YOKOGAWA_FA_M3_Binary_Mode_Ethernet.pdf","FA-M3 CPU SP35-5N, SP55-5N with F3LE01-5T / F3LE11-0T Ethernet module"],
+["Yokogawa","YOKOGAWA FA-M3","YOKOGAWA_FA_M3.pdf","FA-M3 CPU SP35-5N, SP55-5N CPU port; F3LC11 Computer Link module"],
+["Yokogawa","YOKOGAWA FA-M3 (Ethernet)","YOKOGAWA_FA_M3_Ethernet.pdf","FA-M3 CPU SP35-5N, SP55-5N with F3LE01-5T / F3LE11-0T Ethernet module"]
+];
+
+// ---------- helpers ----------
+const $ = s => document.querySelector(s);
+const esc = s => s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+function connType(name){
+  if (/usb/i.test(name)) return "usb";
+  if (/can\s?bus|canopen/i.test(name)) return "can";
+  if (/ethernet|tcp\/ip|knxnet|bacnet\/ip|opc ua/i.test(name)) return "eth";
+  return "ser";
+}
+const CONN_LABEL = {eth:"Ethernet", ser:"Serial / Other", usb:"USB", can:"CAN bus"};
+
+let query = "", conn = "all", vendor = null;
+
+function highlight(text, terms){
+  let html = esc(text);
+  if (!terms.length) return html;
+  for (const t of terms){
+    if (t.length < 2) continue;
+    const re = new RegExp("(" + t.replace(/[.*+?^${}()|[\]\\]/g,"\\$&") + ")","gi");
+    html = html.replace(re,"<mark>$1</mark>");
+  }
+  return html;
+}
+
+function matches(item, terms){
+  if (!terms.length) return true;
+  const hay = (item[0]+" "+item[1]+" "+item[3]+" "+(item[4]||"")).toLowerCase();
+  const nhay = norm(hay);
+  const termOk = t => {
+    const nt = norm(t);
+    // Aliases first, so shorthand like "ab" resolves to Allen-Bradley
+    const alias = ALIASES[t] || ALIASES[nt];
+    if (alias && (hay.includes(alias) || nhay.includes(norm(alias)))) return true;
+    // Very short terms must match whole words ("ge", "ab"), not fragments of "absolute" etc.
+    if (nt.length <= 2){
+      return new RegExp("\\b" + t.replace(/[.*+?^${}()|[\]\\]/g,"\\$&") + "\\b").test(hay);
+    }
+    if (hay.includes(t) || nhay.includes(nt)) return true;
+    // "micrologix1400" → ["micrologix","1400"]: split at letter→digit boundary, all parts must match
+    const parts = nt.split(/(?<=[a-z])(?=[0-9])/);
+    return parts.length > 1 && parts.every(p => p.length > 1 && (hay.includes(p) || nhay.includes(p)));
+  };
+  if (terms.every(termOk)) return true;
+  // Joined fallback: "s7 1200" → "s71200" matches "S7-1200"
+  const joined = norm(terms.join(""));
+  return joined.length > 2 && nhay.includes(joined);
+}
+
+function render(){
+  const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
+  const filtered = DRIVERS.filter(d =>
+    (conn === "all" || connType(d[1]) === conn) &&
+    (!vendor || d[0] === vendor) &&
+    matches(d, terms)
+  );
+
+  // group by vendor, preserving original order
+  const groups = new Map();
+  for (const d of filtered){
+    if (!groups.has(d[0])) groups.set(d[0], []);
+    groups.get(d[0]).push(d);
+  }
+
+  const out = [];
+  for (const [v, items] of groups){
+    // Common picks float to the top of their group (stable sort preserves source order otherwise)
+    items.sort((a,b) => POPULAR.has(b[1]) - POPULAR.has(a[1]));
+    out.push(`<section class="group">
+      <div class="group-h"><h2>${esc(v)}</h2><span class="n">${items.length} driver${items.length>1?"s":""}</span></div>
+      ${items.map(d => {
+        const ct = connType(d[1]);
+        const pop = POPULAR.has(d[1])
+          ? `<span class="badge pop" title="Commonly used driver when this PLC family matches several — confirm details in the connection guide">★ Common pick</span>`
+          : "";
+        const report = REPORTING_ENABLED
+          ? `<a class="report" target="_blank" rel="noopener" href="${REPO_URL}/issues/new?title=${encodeURIComponent("Broken PDF link: " + d[1])}&body=${encodeURIComponent("PDF: " + BASE + d[2])}">Broken link?</a>`
+          : "";
+        return `<article class="driver">
+          <div class="d-left">
+            <div class="d-name">${highlight(d[1], terms)}</div>
+            <div class="badges">${pop}<span class="badge ${ct}">${CONN_LABEL[ct]}</span></div>
+            <div class="d-actions">
+              <a class="pdf" href="${BASE + d[2]}" target="_blank" rel="noopener">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Connection guide (PDF)
+              </a>
+              ${report}
+            </div>
+          </div>
+          <div class="d-right">
+            <span class="lbl">Recommended for</span>
+            ${highlight(d[3], terms)}
+            ${d[4] ? `<span class="note">${highlight(d[4], terms)}</span>` : ""}
+          </div>
+        </article>`;
+      }).join("")}
+    </section>`);
+  }
+
+  $("#results").innerHTML = out.length ? out.join("") : `
+    <div class="empty">
+      <p class="big">No drivers match "${esc(query)}"</p>
+      <p>Try a shorter model name (e.g. "FX5" instead of "FX5U-32M"), or check the
+      <a href="https://www.weintek.com/globalw/Software/PLC.htm" target="_blank" rel="noopener">official Device Driver Search</a> — less-common vendors aren't listed here.</p>
+    </div>`;
+
+  $("#count").textContent = `${filtered.length} of ${DRIVERS.length} drivers`;
+  writeHash();
+}
+
+// ---------- shareable URLs ----------
+// State lives in the hash (#q=fx5u&conn=eth&v=Mitsubishi%20Electric) so any filtered view can be linked.
+function writeHash(){
+  const p = new URLSearchParams();
+  if (query) p.set("q", query);
+  if (conn !== "all") p.set("conn", conn);
+  if (vendor) p.set("v", vendor);
+  const s = p.toString();
+  history.replaceState(null, "", s ? "#" + s : location.pathname + location.search);
+}
+
+function readHash(){
+  const p = new URLSearchParams(location.hash.slice(1));
+  const q = p.get("q") || "";
+  const c = p.get("conn") || "all";
+  const v = p.get("v");
+
+  query = q;
+  const inp = $("#q");
+  inp.value = q;
+  $("#clearBtn").style.display = q ? "block" : "none";
+
+  conn = ["all","eth","ser","usb","can"].includes(c) ? c : "all";
+  document.querySelectorAll(".conn-filters .chip").forEach(x =>
+    x.setAttribute("aria-pressed", x.dataset.conn === conn ? "true" : "false"));
+
+  vendor = (v && DRIVERS.some(d => d[0] === v)) ? v : null;
+  document.querySelectorAll("#vendors button").forEach(x =>
+    x.setAttribute("aria-pressed", x.dataset.v === vendor ? "true" : "false"));
+}
+
+// ---------- vendor chips ----------
+function buildVendors(){
+  const counts = new Map();
+  for (const d of DRIVERS) counts.set(d[0], (counts.get(d[0])||0)+1);
+  const names = [...counts.keys()].sort((a,b)=>a.localeCompare(b));
+  $("#vendors").innerHTML = names.map(v =>
+    `<button data-v="${esc(v)}" aria-pressed="false">${esc(v)}<small>${counts.get(v)}</small></button>`
+  ).join("");
+  $("#vendors").addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    const v = b.dataset.v;
+    vendor = (vendor === v) ? null : v;
+    document.querySelectorAll("#vendors button").forEach(x =>
+      x.setAttribute("aria-pressed", x.dataset.v === vendor ? "true" : "false"));
+    render();
+  });
+}
+
+// ---------- autocomplete index ----------
+// Build suggestions from manufacturers, driver names, and individual model phrases.
+const SUGGESTIONS = (() => {
+  const map = new Map(); // lowercased text -> {text, kind, rank}
+  const add = (text, kind, rank) => {
+    text = text.trim().replace(/\s+/g," ");
+    if (text.length < 2) return;
+    const key = text.toLowerCase();
+    if (!map.has(key) || map.get(key).rank > rank) map.set(key, {text, kind, rank});
+  };
+  for (const d of DRIVERS){
+    add(d[0], "vendor", 2);
+    add(d[1], "driver", 1);
+    // split model strings into individual phrases: "MicroLogix 1000", "SLC 5/03", "FX5U" …
+    d[3].split(/[;,:]| and /).forEach(p => {
+      p = p.replace(/\(.*?\)/g,"").replace(/\b(series|with|incl\.?|e\.g\.?)\b/gi,"").trim();
+      if (p && p.length <= 40 && !/[():]/.test(p) && /\d|[A-Z]{2,}/.test(p)) add(p, "model", 0);
+    });
+  }
+  return [...map.values()];
+})();
+
+function getSuggestions(q){
+  const raw = q.toLowerCase().trim();
+  if (raw.length < 2) return [];
+  const byRank = (a,b) => a.rank - b.rank || a.text.length - b.text.length;
+
+  const collect = needle => {
+    const nq = norm(needle);
+    const starts = [], contains = [];
+    for (const s of SUGGESTIONS){
+      const lower = s.text.toLowerCase(), nl = norm(s.text);
+      if (lower === needle || nl === nq) continue;
+      if (lower.startsWith(needle) || (nq && nl.startsWith(nq))) starts.push(s);
+      else if (lower.includes(needle) || (nq && nq.length > 2 && nl.includes(nq))) contains.push(s);
+    }
+    return starts.sort(byRank).concat(contains.sort(byRank));
+  };
+
+  let out = collect(raw);
+  const alias = ALIASES[raw] || ALIASES[norm(raw)];
+  if (alias) out = collect(alias).concat(out);
+
+  // dedupe, cap at 8
+  const seen = new Set(), result = [];
+  for (const s of out){
+    if (seen.has(s.text)) continue;
+    seen.add(s.text); result.push(s);
+    if (result.length === 8) break;
+  }
+  return result;
+}
+
+// ---------- search + autocomplete UI ----------
+const input = $("#q"), clearBtn = $("#clearBtn"), suggestEl = $("#suggest");
+let t, activeIdx = -1, currentSuggestions = [];
+
+function applyQuery(value){
+  query = value.trim();
+  clearBtn.style.display = query ? "block" : "none";
+  render();
+}
+
+function closeSuggest(){
+  suggestEl.classList.remove("open");
+  suggestEl.innerHTML = "";
+  input.setAttribute("aria-expanded","false");
+  activeIdx = -1; currentSuggestions = [];
+}
+
+function openSuggest(){
+  const q = input.value.trim();
+  currentSuggestions = getSuggestions(q);
+  if (!currentSuggestions.length){ closeSuggest(); return; }
+  const re = new RegExp("(" + q.replace(/[.*+?^${}()|[\]\\]/g,"\\$&") + ")","i");
+  suggestEl.innerHTML = currentSuggestions.map((s,i) =>
+    `<div class="s-item" role="option" id="opt-${i}" data-i="${i}" aria-selected="false">
+      <span class="s-text">${esc(s.text).replace(re,"<b>$1</b>")}</span>
+      <span class="s-kind ${s.kind}">${s.kind === "vendor" ? "brand" : s.kind}</span>
+    </div>`).join("");
+  suggestEl.classList.add("open");
+  input.setAttribute("aria-expanded","true");
+  activeIdx = -1;
+}
+
+function setActive(i){
+  const items = suggestEl.querySelectorAll(".s-item");
+  items.forEach(el => { el.classList.remove("active"); el.setAttribute("aria-selected","false"); });
+  activeIdx = i;
+  if (i >= 0 && items[i]){
+    items[i].classList.add("active");
+    items[i].setAttribute("aria-selected","true");
+    items[i].scrollIntoView({block:"nearest"});
+    input.setAttribute("aria-activedescendant","opt-"+i);
+  } else {
+    input.removeAttribute("aria-activedescendant");
+  }
+}
+
+function pickSuggestion(i){
+  if (i < 0 || !currentSuggestions[i]) return;
+  input.value = currentSuggestions[i].text;
+  closeSuggest();
+  applyQuery(input.value);
+  input.focus();
+}
+
+input.addEventListener("input", () => {
+  clearTimeout(t);
+  openSuggest();
+  t = setTimeout(() => applyQuery(input.value), 120);
+});
+
+input.addEventListener("keydown", e => {
+  const open = suggestEl.classList.contains("open");
+  if (e.key === "ArrowDown" && open){ e.preventDefault(); setActive(Math.min(activeIdx + 1, currentSuggestions.length - 1)); }
+  else if (e.key === "ArrowUp" && open){ e.preventDefault(); setActive(Math.max(activeIdx - 1, -1)); }
+  else if (e.key === "Tab" && open && currentSuggestions.length){ e.preventDefault(); pickSuggestion(activeIdx >= 0 ? activeIdx : 0); }
+  else if (e.key === "Enter"){ e.preventDefault(); if (open && activeIdx >= 0) pickSuggestion(activeIdx); else { closeSuggest(); applyQuery(input.value); } }
+  else if (e.key === "Escape"){
+    if (open) closeSuggest();
+    else { input.value=""; applyQuery(""); }
+  }
+});
+
+suggestEl.addEventListener("mousedown", e => {
+  const item = e.target.closest(".s-item");
+  if (item){ e.preventDefault(); pickSuggestion(+item.dataset.i); }
+});
+
+input.addEventListener("blur", () => setTimeout(closeSuggest, 120));
+
+clearBtn.addEventListener("click", () => {
+  input.value = ""; closeSuggest(); applyQuery(""); input.focus();
+});
+
+document.addEventListener("keydown", e => {
+  if (e.key === "/" && document.activeElement !== input){ e.preventDefault(); input.focus(); }
+});
+document.querySelectorAll(".conn-filters .chip").forEach(b => {
+  b.addEventListener("click", () => {
+    conn = b.dataset.conn;
+    document.querySelectorAll(".conn-filters .chip").forEach(x =>
+      x.setAttribute("aria-pressed", x === b ? "true" : "false"));
+    render();
+  });
+});
+
+buildVendors();
+readHash();   // restore state from a shared link, if present
+render();
+</script>
+</body>
+</html>
