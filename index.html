@@ -99,7 +99,7 @@
   .s-item:hover,.s-item.active{background:var(--blue-light)}
   .s-item .s-text{font-family:var(--mono);font-size:13.5px;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .s-item .s-text b{color:var(--blue);font-weight:600}
-  .s-item .s-kind{margin-left:auto;flex:none;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:#9bb1c7;border-radius:3px;padding:2px 6px}
+  .s-item .s-kind{margin-left:auto;flex:none;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:#9bb1c7;border-radius:3px;padding:2px 6px;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .s-item .s-kind.model{background:var(--blue)}
   .s-item .s-kind.driver{background:#3a78b5}
   .s-item .s-kind.vendor{background:#6b85a0}
@@ -806,16 +806,16 @@ function buildVendors(){
 // ---------- autocomplete index ----------
 // Build suggestions from manufacturers, driver names, and individual model phrases.
 const SUGGESTIONS = (() => {
-  const map = new Map(); // lowercased text -> {text, kind, rank}
-  const add = (text, kind, rank) => {
+  const map = new Map(); // lowercased text -> {text, kind, rank, vendor}
+  const add = (text, kind, rank, vendor) => {
     text = text.trim().replace(/\s+/g," ");
     if (text.length < 2) return;
     const key = text.toLowerCase();
-    if (!map.has(key) || map.get(key).rank > rank) map.set(key, {text, kind, rank});
+    if (!map.has(key) || map.get(key).rank > rank) map.set(key, {text, kind, rank, vendor});
   };
   for (const d of DRIVERS){
     add(d[0], "vendor", 2);
-    add(d[1], "driver", 1);
+    add(d[1], "driver", 1, d[0]);
     // split model strings into individual phrases: "MicroLogix 1000", "SLC 5/03", "FX5U" …
     d[3].split(/[;,:]| and /).forEach(p => {
       p = p.replace(/\(.*?\)/g,"").replace(/\b(series|with|incl\.?|e\.g\.?)\b/gi,"").trim();
@@ -846,14 +846,15 @@ function getSuggestions(q){
   const alias = ALIASES[raw] || ALIASES[norm(raw)];
   if (alias) out = collect(alias).concat(out);
 
-  // dedupe, cap at 8
+  // dedupe, collect candidates, float recommended drivers to top, then cap at 3
   const seen = new Set(), result = [];
   for (const s of out){
     if (seen.has(s.text)) continue;
     seen.add(s.text); result.push(s);
-    if (result.length === 8) break;
+    if (result.length === 20) break;
   }
-  return result;
+  result.sort((a,b) => POPULAR.has(b.text) - POPULAR.has(a.text));
+  return result.slice(0, 3);
 }
 
 // ---------- search + autocomplete UI ----------
@@ -891,7 +892,7 @@ function openSuggest(){
   suggestEl.innerHTML = currentSuggestions.map((s,i) =>
     `<div class="s-item" role="option" id="opt-${i}" data-i="${i}" aria-selected="false">
       <span class="s-text">${esc(s.text).replace(re,"<b>$1</b>")}</span>
-      <span class="s-kind ${s.kind}">${s.kind === "vendor" ? "brand" : s.kind}</span>
+      <span class="s-kind ${s.kind}">${s.kind === "driver" ? s.vendor : s.kind === "vendor" ? "brand" : "PLC model"}</span>
     </div>`).join("");
   suggestEl.classList.add("open");
   input.setAttribute("aria-expanded","true");
