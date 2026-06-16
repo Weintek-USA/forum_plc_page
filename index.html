@@ -8,17 +8,10 @@
 <meta property="og:title" content="Weintek HMI Driver Index — Find your PLC">
 <meta property="og:description" content="Type your PLC model to find the recommended EasyBuilder Pro driver and its connection guide PDF. 220 drivers, 45 manufacturers.">
 <meta property="og:type" content="website">
-<<<<<<< HEAD
 <link rel="icon" href="weintek_logo/WeintekUSA_Logo_Vertical_Color.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-=======
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230054a6'/%3E%3Ctext x='16' y='23' font-family='Arial,sans-serif' font-size='19' font-weight='bold' fill='white' text-anchor='middle'%3EW%3C/text%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
->>>>>>> 972957223bab0eee26afb5c31362320afcf8ddaf
 <style>
   :root{
     --blue:#0054a6;          /* Weintek corporate blue */
@@ -32,11 +25,7 @@
     --tag-bg:#eef3f8;
     --tag-ink:#3a4a5c;
     --mono:'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
-<<<<<<< HEAD
     --sans:'Poppins', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-=======
-    --sans:'Archivo', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
->>>>>>> 972957223bab0eee26afb5c31362320afcf8ddaf
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -46,7 +35,6 @@
 
   /* ---------- top contact strip (like weintekusa.com) ---------- */
   .topstrip{background:#fff;border-bottom:1px solid var(--line)}
-<<<<<<< HEAD
   .topstrip .inner{max-width:1100px;margin:0 auto;padding:7px 20px;display:flex;justify-content:space-between;align-items:center;gap:22px;font-size:12.5px;color:#5a6878}
   .topstrip a{color:#5a6878;text-decoration:none}
   .topstrip a:hover{color:var(--blue)}
@@ -104,43 +92,6 @@
   .suggest{
     position:absolute;left:0;right:0;top:calc(100% + 8px);background:#fff;border:1px solid var(--line);
     border-radius:8px;box-shadow:0 10px 30px rgba(10,42,77,.2);max-height:330px;overflow-y:auto;display:none;z-index:40;
-=======
-  .topstrip .inner{max-width:1100px;margin:0 auto;padding:7px 20px;display:flex;justify-content:flex-end;gap:22px;font-size:12.5px;color:#5a6878}
-  .topstrip a{color:#5a6878;text-decoration:none}
-  .topstrip a:hover{color:var(--blue)}
-
-  /* ---------- header ---------- */
-  header{background:linear-gradient(135deg,var(--blue-deep) 0%, var(--blue-dark) 55%, var(--blue) 100%);color:#fff}
-  .plate{max-width:1100px;margin:0 auto;padding:30px 20px 24px}
-  .plate-top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
-  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#9dbede;margin:0 0 6px}
-  h1{font-size:clamp(24px,4vw,36px);font-weight:750;font-stretch:112%;letter-spacing:-.01em;margin:0;color:#fff}
-  h1 .accent{color:#8fc1ee}
-  .plate-links{font-family:var(--mono);font-size:12px;display:flex;gap:18px;flex-wrap:wrap}
-  .plate-links a{color:#c9ddf0;text-decoration:none;border-bottom:1px solid #3f6c9c;padding-bottom:2px}
-  .plate-links a:hover{color:#fff;border-color:#8fc1ee}
-  .plate p.sub{margin:10px 0 0;max-width:62ch;color:#b9d2e8;font-size:14px}
-
-  /* ---------- search bar (sticky) ---------- */
-  .searchbar{position:sticky;top:0;z-index:30;background:var(--blue);border-bottom:1px solid var(--blue-dark);box-shadow:0 2px 10px rgba(0,40,80,.22)}
-  .searchwrap{max-width:1100px;margin:0 auto;padding:14px 20px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-  .searchbox{flex:1 1 340px;position:relative}
-  .searchbox input{
-    width:100%;padding:12px 84px 12px 42px;border-radius:6px;border:1px solid var(--blue-dark);
-    background:#fff;color:var(--ink);font-family:var(--mono);font-size:15px;outline:none;
-  }
-  .searchbox input::placeholder{color:#8b99a8}
-  .searchbox input:focus{border-color:#8fc1ee;box-shadow:0 0 0 3px rgba(143,193,238,.4)}
-  .searchbox .lens{position:absolute;left:13px;top:21px;transform:translateY(-50%);color:#8b99a8;pointer-events:none;font-size:15px}
-  .searchbox .kbd{position:absolute;right:46px;top:21px;transform:translateY(-50%);font-family:var(--mono);font-size:11px;color:#8b99a8;border:1px solid var(--line);border-radius:4px;padding:1px 6px}
-  .searchbox .clear{position:absolute;right:8px;top:21px;transform:translateY(-50%);background:none;border:none;color:#8b99a8;font-size:18px;cursor:pointer;padding:4px;display:none;line-height:1}
-  .searchbox .clear:hover{color:var(--ink)}
-
-  /* ---------- autocomplete ---------- */
-  .suggest{
-    position:absolute;left:0;right:0;top:calc(100% + 5px);background:#fff;border:1px solid var(--line);
-    border-radius:6px;box-shadow:0 10px 30px rgba(10,42,77,.18);max-height:330px;overflow-y:auto;display:none;z-index:40;
->>>>>>> 972957223bab0eee26afb5c31362320afcf8ddaf
   }
   .suggest.open{display:block}
   .s-item{display:flex;align-items:center;gap:10px;padding:9px 13px;cursor:pointer;border-bottom:1px solid #eef2f6}
@@ -153,7 +104,6 @@
   .s-item .s-kind.driver{background:#3a78b5}
   .s-item .s-kind.vendor{background:#6b85a0}
 
-<<<<<<< HEAD
   /* ---------- filters row ---------- */
   .search-filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:center}
   .searchzone.is-stuck .search-filters{justify-content:flex-start}
@@ -195,17 +145,6 @@
   .filterpanel-toggle[aria-expanded="true"] .fp-arrow{transform:rotate(180deg)}
   .filterpanel-body{display:none;border:1px solid var(--blue);border-top:none;border-radius:0 0 6px 6px;background:var(--card);padding:14px 14px 12px}
   .filterpanel-body.open{display:block}
-=======
-  .conn-filters{display:flex;gap:6px;flex-wrap:wrap}
-  .chip{font-family:var(--mono);font-size:12px;padding:7px 12px;border-radius:99px;border:1px solid #3f6c9c;background:transparent;color:#d4e4f3;cursor:pointer}
-  .chip:hover{border-color:#8fc1ee}
-  .chip[aria-pressed="true"]{background:#fff;border-color:#fff;color:var(--blue);font-weight:600}
-  .count{font-family:var(--mono);font-size:12px;color:#b9d2e8;margin-left:auto;white-space:nowrap}
-
-  /* ---------- vendor index ---------- */
-  .vendorbar{max-width:1100px;margin:18px auto 0;padding:0 20px}
-  .vendorbar h2{font-size:12px;font-family:var(--mono);letter-spacing:.16em;text-transform:uppercase;color:#6b7c8e;margin:0 0 8px}
->>>>>>> 972957223bab0eee26afb5c31362320afcf8ddaf
   .vendors{display:flex;flex-wrap:wrap;gap:6px}
   .vendors button{font-family:var(--sans);font-size:13px;padding:6px 11px;border-radius:5px;border:1px solid var(--line);background:var(--card);color:var(--tag-ink);cursor:pointer}
   .vendors button small{font-family:var(--mono);color:#8b99a8;margin-left:5px;font-size:11px}
@@ -217,20 +156,12 @@
   main{max-width:1100px;margin:0 auto;padding:10px 20px 80px}
   .group{margin-top:30px}
   .group-h{display:flex;align-items:baseline;gap:12px;border-bottom:2px solid var(--blue);padding-bottom:6px;margin-bottom:0}
-<<<<<<< HEAD
   .group-h h2{font-size:19px;font-weight:700;margin:0;color:var(--blue-dark)}
-=======
-  .group-h h2{font-size:19px;font-weight:700;font-stretch:108%;margin:0;color:var(--blue-dark)}
->>>>>>> 972957223bab0eee26afb5c31362320afcf8ddaf
   .group-h .n{font-family:var(--mono);font-size:12px;color:#6b7c8e}
   .driver{background:var(--card);border:1px solid var(--line);border-top:none;padding:14px 16px;display:grid;grid-template-columns:minmax(260px,1.1fr) 1.6fr;gap:8px 24px}
   .driver:first-of-type{border-top:1px solid var(--line)}
   .d-left{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
-<<<<<<< HEAD
   .d-name{font-weight:600;font-size:15px;line-height:1.35}
-=======
-  .d-name{font-weight:650;font-size:15px;line-height:1.35}
->>>>>>> 972957223bab0eee26afb5c31362320afcf8ddaf
   .badges{display:flex;gap:5px;flex-wrap:wrap}
   .badge{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:3px;background:var(--tag-bg);color:var(--tag-ink);border:1px solid var(--line)}
   .badge.eth{background:#e7f0fa;border-color:#cadcef;color:#0054a6}
@@ -259,14 +190,10 @@
 
   @media (max-width:760px){
     .driver{grid-template-columns:1fr}
-<<<<<<< HEAD
     .hero-top{padding:40px 20px 32px}
     .searchzone{padding:0 16px 40px}
     .searchzone.is-stuck{padding:10px 16px}
     .search-inner{gap:10px}
-=======
-    .count{margin-left:0;width:100%}
->>>>>>> 972957223bab0eee26afb5c31362320afcf8ddaf
   }
   @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
   :focus-visible{outline:3px solid #8fc1ee;outline-offset:2px}
@@ -274,7 +201,6 @@
 </head>
 <body>
 
-<<<<<<< HEAD
 <!-- Top contact strip (mirrors weintekusa.com header bar) -->
 <div class="topstrip">
   <div class="inner">
@@ -381,62 +307,6 @@
 <footer>
   <div class="inner">
     <img class="footer-logo" src="weintek_logo/WeintekUSA_Logo_Vertical_Color.svg" alt="WeintekUSA">
-=======
-<div class="topstrip">
-  <div class="inner">
-    <a href="mailto:sales@weintekusa.com">sales@weintekusa.com</a>
-    <span>Order by Phone: 1-425-488-1100</span>
-  </div>
-</div>
-
-<header>
-  <div class="plate">
-    <div class="plate-top">
-      <div>
-        <p class="eyebrow">EasyBuilder Pro · Communication Drivers</p>
-        <h1>Weintek HMI <span class="accent">Driver Index</span></h1>
-      </div>
-      <nav class="plate-links">
-        <a href="https://www.weintek.com/globalw/Software/PLC.htm" target="_blank" rel="noopener">Official driver search ↗</a>
-        <a href="https://forum.weintekusa.com/pub/supported-devices" target="_blank" rel="noopener">Original list ↗</a>
-      </nav>
-    </div>
-    <p class="sub">Type your PLC model (e.g. <em>CompactLogix</em>, <em>FX5U</em>, <em>S7-1200</em>, <em>Micro850</em>) to find the recommended driver and download its connection guide.</p>
-  </div>
-</header>
-
-<div class="searchbar">
-  <div class="searchwrap">
-    <div class="searchbox">
-      <span class="lens" aria-hidden="true">⌕</span>
-      <input id="q" type="search" placeholder="Search PLC model, driver, or manufacturer…" autocomplete="off"
-             role="combobox" aria-expanded="false" aria-controls="suggest" aria-autocomplete="list"
-             aria-label="Search PLC model, driver, or manufacturer">
-      <span class="kbd" aria-hidden="true">/</span>
-      <button class="clear" id="clearBtn" aria-label="Clear search">×</button>
-      <div class="suggest" id="suggest" role="listbox" aria-label="Search suggestions"></div>
-    </div>
-    <div class="conn-filters" role="group" aria-label="Filter by connection type">
-      <button class="chip" data-conn="all" aria-pressed="true">All</button>
-      <button class="chip" data-conn="eth" aria-pressed="false">Ethernet</button>
-      <button class="chip" data-conn="ser" aria-pressed="false">Serial / Other</button>
-      <button class="chip" data-conn="usb" aria-pressed="false">USB</button>
-      <button class="chip" data-conn="can" aria-pressed="false">CAN bus</button>
-    </div>
-    <span class="count" id="count"></span>
-  </div>
-</div>
-
-<div class="vendorbar">
-  <h2>Manufacturers</h2>
-  <div class="vendors" id="vendors"></div>
-</div>
-
-<main id="results" aria-live="polite"></main>
-
-<footer>
-  <div class="inner">
->>>>>>> 972957223bab0eee26afb5c31362320afcf8ddaf
     Unofficial, searchable rebuild of the WeintekUSA <a href="https://forum.weintekusa.com/pub/supported-devices" target="_blank" rel="noopener">Supported Devices</a> page.
     All instruction PDFs link directly to <code>dl.weintek.com</code>. Less-common vendors are omitted — use the
     <a href="https://www.weintek.com/globalw/Software/PLC.htm" target="_blank" rel="noopener">official Device Driver Search</a> for the complete list.
@@ -445,13 +315,10 @@
 </footer>
 
 <script>
-<<<<<<< HEAD
 // ── CONFIGURATION ─────────────────────────────────────────────────────────────
 // BASE: root URL for all PDF downloads — change only if Weintek moves the files.
 // REPO_URL: set to your GitHub repo to enable per-driver "Broken link?" reporting.
 //           Leave the USERNAME/REPOSITORY placeholder to hide those links entirely.
-=======
->>>>>>> 972957223bab0eee26afb5c31362320afcf8ddaf
 const BASE = "https://dl.weintek.com/public/PLC_Connect_Guide/";
 
 // ↓ Change this to your GitHub repo (e.g. "https://github.com/yourname/weintek-driver-index")
@@ -486,16 +353,12 @@ const ALIASES = {
   "ad": "automation direct"
 };
 
-<<<<<<< HEAD
 // DRIVERS — each entry: [vendor, driverName, pdfFilename, supportedModels, optionalNote?]
 //   vendor          — manufacturer name; used to group result cards and build the vendor filter bar
 //   driverName      — EasyBuilder Pro driver string; matched against the search input
 //   pdfFilename     — filename appended to BASE to form the PDF download URL
 //   supportedModels — free-text list of compatible PLC models; also searched
 //   optionalNote    — (optional) caveats, firmware requirements, or variant details
-=======
-// [vendor, driver name, pdf filename, supported models, optional note]
->>>>>>> 972957223bab0eee26afb5c31362320afcf8ddaf
 const DRIVERS = [
 // Allen-Bradley / Rockwell
 ["Allen-Bradley (Rockwell)","Rockwell EtherNet/IP (CompactLogix)","Rockwell_EtherNet_IP_CompactLogix.pdf","ControlLogix, CompactLogix, FlexLogix (Ethernet)"],
@@ -788,11 +651,8 @@ function highlight(text, terms){
   return html;
 }
 
-<<<<<<< HEAD
 // Returns true if every search term hits somewhere in the driver row.
 // Strategy: alias expansion → whole-word short match → substring/normalized → joined fallback.
-=======
->>>>>>> 972957223bab0eee26afb5c31362320afcf8ddaf
 function matches(item, terms){
   if (!terms.length) return true;
   const hay = (item[0]+" "+item[1]+" "+item[3]+" "+(item[4]||"")).toLowerCase();
@@ -817,10 +677,7 @@ function matches(item, terms){
   return joined.length > 2 && nhay.includes(joined);
 }
 
-<<<<<<< HEAD
 // Filters DRIVERS by current query/conn/vendor state, groups by manufacturer, and writes HTML.
-=======
->>>>>>> 972957223bab0eee26afb5c31362320afcf8ddaf
 function render(){
   const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
   const filtered = DRIVERS.filter(d =>
@@ -845,11 +702,7 @@ function render(){
       ${items.map(d => {
         const ct = connType(d[1]);
         const pop = POPULAR.has(d[1])
-<<<<<<< HEAD
           ? `<span class="badge pop" title="Commonly used driver when this PLC family matches several — confirm details in the connection guide">★ Recommended Driver</span>`
-=======
-          ? `<span class="badge pop" title="Commonly used driver when this PLC family matches several — confirm details in the connection guide">★ Common pick</span>`
->>>>>>> 972957223bab0eee26afb5c31362320afcf8ddaf
           : "";
         const report = REPORTING_ENABLED
           ? `<a class="report" target="_blank" rel="noopener" href="${REPO_URL}/issues/new?title=${encodeURIComponent("Broken PDF link: " + d[1])}&body=${encodeURIComponent("PDF: " + BASE + d[2])}">Broken link?</a>`
@@ -884,10 +737,7 @@ function render(){
     </div>`;
 
   $("#count").textContent = `${filtered.length} of ${DRIVERS.length} drivers`;
-<<<<<<< HEAD
   $("#clearAllBtn").style.display = (query || conn !== "all" || vendor) ? "block" : "none";
-=======
->>>>>>> 972957223bab0eee26afb5c31362320afcf8ddaf
   writeHash();
 }
 
@@ -923,23 +773,17 @@ function readHash(){
 }
 
 // ---------- vendor chips ----------
-<<<<<<< HEAD
 function syncFilterToggle(){
   const active = $("#fpActive"), count = $("#fpCount");
   if (vendor){ active.textContent = vendor; active.style.display = ""; count.style.display = "none"; }
   else { active.style.display = "none"; count.style.display = ""; }
 }
 
-=======
->>>>>>> 972957223bab0eee26afb5c31362320afcf8ddaf
 function buildVendors(){
   const counts = new Map();
   for (const d of DRIVERS) counts.set(d[0], (counts.get(d[0])||0)+1);
   const names = [...counts.keys()].sort((a,b)=>a.localeCompare(b));
-<<<<<<< HEAD
   $("#fpCount").textContent = `${names.length} vendors`;
-=======
->>>>>>> 972957223bab0eee26afb5c31362320afcf8ddaf
   $("#vendors").innerHTML = names.map(v =>
     `<button data-v="${esc(v)}" aria-pressed="false">${esc(v)}<small>${counts.get(v)}</small></button>`
   ).join("");
@@ -949,7 +793,6 @@ function buildVendors(){
     vendor = (vendor === v) ? null : v;
     document.querySelectorAll("#vendors button").forEach(x =>
       x.setAttribute("aria-pressed", x.dataset.v === vendor ? "true" : "false"));
-<<<<<<< HEAD
     syncFilterToggle();
     render();
   });
@@ -958,10 +801,6 @@ function buildVendors(){
     $("#filterToggle").setAttribute("aria-expanded", String(!isOpen));
     $("#filterBody").classList.toggle("open", !isOpen);
   });
-=======
-    render();
-  });
->>>>>>> 972957223bab0eee26afb5c31362320afcf8ddaf
 }
 
 // ---------- autocomplete index ----------
@@ -1019,7 +858,6 @@ function getSuggestions(q){
 
 // ---------- search + autocomplete UI ----------
 const input = $("#q"), clearBtn = $("#clearBtn"), suggestEl = $("#suggest");
-<<<<<<< HEAD
 const quickPick = $("#quickPick");
 let t, activeIdx = -1, currentSuggestions = [];
 
@@ -1032,10 +870,6 @@ quickPick.addEventListener("change", () => {
   input.focus();
 });
 
-=======
-let t, activeIdx = -1, currentSuggestions = [];
-
->>>>>>> 972957223bab0eee26afb5c31362320afcf8ddaf
 function applyQuery(value){
   query = value.trim();
   clearBtn.style.display = query ? "block" : "none";
@@ -1088,10 +922,7 @@ function pickSuggestion(i){
 
 input.addEventListener("input", () => {
   clearTimeout(t);
-<<<<<<< HEAD
   quickPick.value = ""; quickPick.classList.remove("has-value");
-=======
->>>>>>> 972957223bab0eee26afb5c31362320afcf8ddaf
   openSuggest();
   t = setTimeout(() => applyQuery(input.value), 120);
 });
@@ -1116,7 +947,6 @@ suggestEl.addEventListener("mousedown", e => {
 input.addEventListener("blur", () => setTimeout(closeSuggest, 120));
 
 clearBtn.addEventListener("click", () => {
-<<<<<<< HEAD
   input.value = ""; quickPick.value = ""; quickPick.classList.remove("has-value");
   closeSuggest(); applyQuery(""); input.focus();
 });
@@ -1134,9 +964,6 @@ $("#clearAllBtn").addEventListener("click", () => {
   syncFilterToggle();
   render();
   input.focus();
-=======
-  input.value = ""; closeSuggest(); applyQuery(""); input.focus();
->>>>>>> 972957223bab0eee26afb5c31362320afcf8ddaf
 });
 
 document.addEventListener("keydown", e => {
@@ -1151,7 +978,6 @@ document.querySelectorAll(".conn-filters .chip").forEach(b => {
   });
 });
 
-<<<<<<< HEAD
 // Toggle compact "stuck" style when hero-top scrolls out of view
 new IntersectionObserver(([e]) =>
   document.getElementById('searchzone').classList.toggle('is-stuck', !e.isIntersecting),
@@ -1165,11 +991,3 @@ render();
 </script>
 </body>
 </html>
-=======
-buildVendors();
-readHash();   // restore state from a shared link, if present
-render();
-</script>
-</body>
-</html>
->>>>>>> 972957223bab0eee26afb5c31362320afcf8ddaf
